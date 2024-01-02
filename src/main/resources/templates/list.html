@@ -1,34 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-  <title>Gestion des salariés</title>
-  <link rel="stylesheet" href="/static/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/font-awesome.css">
-</head>
+<head th:insert="common :: head"></head>
 <body>
 
-<div>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="http://localhost:8080/">Gestion des salariés</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li><a href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC" class="nav-link">Liste des salariés <span class="badge badge-primary"></span></a></li>
-      </ul>
-
-      <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/salaries" method="GET">
-        <div class="form-group">
-          <input name="nom" class="form-control" placeholder="Rechercher un nom" type="text">
-        </div>
-        <button type="submit" class="btn btn-outline-success ml-2 my-2 my-sm-0">Rechercher</button>
-      </form>
-    </div>
-  </nav>
-</div>
+<div th:insert="common :: header"></div>
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
@@ -47,15 +22,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Jeanne Dupond</td>
-          <td><a href="/salaries/aide/2" class="btn btn-primary ember-view">Détail</a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Robert Martin</td>
-          <td><a href="/salaries/aide/3" class="btn btn-primary ember-view">Détail</a></td>
+
+
+        <tr th:each="salarie : ${salaries}">
+          <th scope="row" th:text="${salarie.id}"></th>
+          <td th:text="${salarie.nom} "></td>
+          <td><a th:href="@{/salaries/{id}(id=${salarie.id})}" class="btn btn-primary ember-view">Détail</a></td>
+
         </tr>
         </tbody>
       </table>

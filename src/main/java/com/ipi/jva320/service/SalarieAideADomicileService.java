@@ -30,6 +30,7 @@ public class SalarieAideADomicileService {
     @Autowired
     private SalarieAideADomicileRepository salarieAideADomicileRepository;
 
+
     public SalarieAideADomicileService() {
     }
 
@@ -102,7 +103,7 @@ public class SalarieAideADomicileService {
         }
         Optional<SalarieAideADomicile> existantOptional = salarieAideADomicileRepository.findById(salarieAideADomicile.getId());
         if (existantOptional.isEmpty()) {
-            throw new SalarieException("Le salarié n'existe pas déjà d'id " + salarieAideADomicile.getId()); // TODO id ou nom ??
+            throw new SalarieException("Le salarié n'as pas déjà d'id " + salarieAideADomicile.getId()); // TODO id ou nom ??
         }
         return salarieAideADomicileRepository.save(salarieAideADomicile);
     }
@@ -117,6 +118,10 @@ public class SalarieAideADomicileService {
             throw new SalarieException("Le salarié n'existe pas déjà d'id " + id); // TODO id ou nom ??
         }
         salarieAideADomicileRepository.deleteById(id);
+    }
+
+    public SalarieAideADomicile findByNom(String nom) {
+        return salarieAideADomicileRepository.findByNom(nom);
     }
 
     /**
